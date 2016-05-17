@@ -31,10 +31,12 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE insertDVD(IN p_user_id int,
-							IN p_date date)
+                            OUT p_dvdid integer(11))
 	BEGIN
-	INSERT INTO DVD (USER_ID, "Date")
-	VALUES(p_user_id,p_date)
+	INSERT INTO DVD (USER_ID, CURRENT_DATE())
+	VALUES(p_user_id,p_date);
+
+    set p_dvdid = LAST_INSERT_ID();
 	END //
 DELIMITER ;
 
