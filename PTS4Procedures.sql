@@ -109,10 +109,12 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE insertMap(IN p_dvd_ID int,
-							IN p_path varchar(255))
+							IN p_path varchar(255),
+                            OUT p_mapid))
 	BEGIN
 	INSERT INTO MAP (DVD_ID, Path)
-	VALUES (p_dvd_ID, p_path)
+	VALUES (p_dvd_ID, p_path);
+    set p_mapid = LAST_INSERT_ID();
 	END //
 DELIMITER ;
 
