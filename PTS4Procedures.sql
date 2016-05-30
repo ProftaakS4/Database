@@ -51,16 +51,17 @@ CREATE PROCEDURE insertPhotographer_Product(IN p_user_id int,
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE insertPhoto(IN p_user_id int,
+CREATE PROCEDURE insertPhoto(IN p_photographer_id int,
 								IN p_map_id int,
-								IN p_loginID varchar(255),
-								IN p_type varchar(255),
 								IN p_image varchar(255),
 								IN p_resolution varchar(255),
-								IN p_description varchar(255))
+								IN p_description varchar(255),
+                                OUT p_last_insert_id)
 	BEGIN
-	INSERT INTO PHOTO (ACCOUNT_ID, MAP_ID, LoginID, Type, Image, Resolution, Description)
-	VALUES (p_user_id, p_map_id, p_loginID, p_type, p_image, p_resolution, p_description)
+	INSERT INTO PHOTO (PHOTOGRAPHER_ID, MAP_ID, Image, Resolution, Description)
+	VALUES (p_photographer_id, p_map_id, p_image, p_resolution, p_description);
+    set p_last_insert_id = LAST_INSERT_ID();
+    
 	END //
 DELIMITER ;
 
